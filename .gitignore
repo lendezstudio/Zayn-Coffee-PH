@@ -1,0 +1,7 @@
+# Raw source photos and internal briefing, not part of the published site
+Images/
+*.pdf
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
