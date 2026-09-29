@@ -746,7 +746,7 @@ p:last-child{ margin-bottom: 0; }
 @media (max-width: 760px){
   .visit-grid{ grid-template-columns: 1fr; }
   .visit-photo{ order: 2; }
-  .visit-photo .arch{ max-width: 320px; }
+  .visit-photo .arch{ max-width: 320px; margin: 0 auto; }
 }
 @media (max-width: 420px){
   .visit-blocks{ grid-template-columns: 1fr; }
