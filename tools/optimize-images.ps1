@@ -73,8 +73,7 @@ $manifest = @(
   @{ src="718075932"; out="visit/doorway-night";   w=@(480,960) }
   @{ src="600883003"; out="cta/storefront-night";    w=@(960,1600,2048) }
 
-  # Brand + social preview
-  @{ src="600344374"; out="og/zayn-coffee-og"; crop=@(0.0,0.12,1.0,0.66); size=@(1200,630) }
+  # (Social preview image is rendered separately by tools/make-og-image.ps1)
 )
 
 $jpeg = [System.Drawing.Imaging.ImageCodecInfo]::GetImageEncoders() | Where-Object { $_.MimeType -eq "image/jpeg" }
