@@ -1,14 +1,16 @@
 ﻿<#
   Zayn Coffee PH - image optimizer
   ---------------------------------
-  Reads the untouched client originals in /Images and writes resized,
-  web-ready JPEGs into /assets/img. Originals are never modified.
+  Reads the untouched client originals in /Images and /Images from Client
+  (JPEG, HEIF or HEIC) and writes resized, web-ready JPEGs into /assets/img.
+  Originals are never modified.
 
   Usage (from the project root):
     powershell -ExecutionPolicy Bypass -File tools/optimize-images.ps1
 
   To add or replace a photo: add a line to $manifest below and re-run.
-    src   = start of the original filename in /Images (unique prefix)
+    src   = start of the original filename (unique prefix)
+    dir   = optional "client" to read from /Images from Client (default /Images)
     out   = output path under assets/img, without extension
     w     = widths to generate (skipped if larger than the source)
     crop  = optional [x, y, w, h] as fractions of the source image
@@ -16,9 +18,11 @@
 #>
 
 Add-Type -AssemblyName System.Drawing
+Add-Type -AssemblyName PresentationCore, WindowsBase   # Windows imaging codecs (HEIF/HEIC)
 
 $root    = Split-Path -Parent $PSScriptRoot
 $srcDir  = Join-Path $root "Images"
+$clientDir = Join-Path $root "Images from Client"
 $outDir  = Join-Path $root "assets\img"
 $quality = 82
 
@@ -38,33 +42,37 @@ $manifest = @(
   @{ src="601814454"; out="story/textured-cream-wall";      w=@(480,960) }
   @{ src="676023496"; out="story/metal-tables";             w=@(480,960) }
 
-  # Menu (photo-to-item matches are PENDING CLIENT CONFIRMATION)
-  @{ src="721387732"; out="menu/cafe-latte";             w=@(480,960) }
-  @{ src="612236182"; out="menu/iced-matcha-latte";      w=@(480,960) }
+  # Menu: drinks named by Zayn Coffee in their filenames (Images from Client)
+  @{ src="Cinnamon Latt";      dir="client"; out="menu/cinnamon-latte";      w=@(480,960) }
+  @{ src="Iced spanish Latt";  dir="client"; out="menu/spanish-latte-iced";  w=@(480,960) }
+  @{ src="Sea salt matcha";    dir="client"; out="menu/sea-salt-matcha";     w=@(480,960) }
+  @{ src="Cold brew";          dir="client"; out="menu/cold-brew";           w=@(480,960) }
+  @{ src="Mont Blanc";         dir="client"; out="menu/mont-blanc";          w=@(480,960) }
+  @{ src="Hot V60";            dir="client"; out="menu/hot-v60";             w=@(480,960) }
+  @{ src="Iced Japanese Pour"; dir="client"; out="menu/iced-japanese-v60";   w=@(480,960) }
+  @{ src="Matcha Pink";        dir="client"; out="menu/matcha-pink";         w=@(480,960) }
+  # Menu: earlier photos (photo-to-item matches PENDING CLIENT CONFIRMATION)
   @{ src="603863609"; out="menu/butter-croissant";       w=@(480,960) }
-  @{ src="615782441"; out="menu/blueberry-cheesecake";   w=@(480,960) }
   @{ src="749330169"; out="menu/matcha-cookies";         w=@(480,960) }
   @{ src="749355219"; out="menu/coffee-served-on-tray";  w=@(480,960) }
   @{ src="690854093_edited"; out="menu/matcha-latte-hot";       w=@(480,960) }
   @{ src="601433788"; out="menu/pastry-case";            w=@(480,960) }
   @{ src="612463648"; out="menu/turkey-cheese-sandwich"; w=@(480,960) }
 
-  # Zayn Experience
+  # Zayn Experience (editorial composition, led by the client's daytime storefront)
+  @{ src="IMG_5901";  dir="client"; out="experience/storefront-daytime"; w=@(480,960,1600) }
   @{ src="601436075"; out="experience/window-bar-arch";    w=@(480,960) }
   @{ src="602390018"; out="experience/dining-room";        w=@(480,960) }
-  @{ src="604525695"; out="experience/coffee-sign-cacti";  w=@(480,960) }
-  @{ src="602322424"; out="experience/backlit-seating";    w=@(480,960) }
-  @{ src="600286684"; out="experience/window-table";       w=@(480,960) }
   @{ src="527737296"; out="experience/espresso-machine";   w=@(480,960) }
-  @{ src="603925583"; out="experience/bar-station";        w=@(480,960) }
   @{ src="602474075"; out="experience/cup-dappled-light";  w=@(480,960) }
 
   # Merchandise (PENDING CLIENT CONFIRMATION of product match)
   @{ src="678935518"; out="merch/coffee-beans";     w=@(480,960) }
-  @{ src="673590696"; out="merch/decanter-glass";   w=@(480,960) }
 
-  # Mobile Coffee Events (temporary mood image, not an event photo)
-  @{ src="602317368"; out="events/branded-cups";    w=@(480,960) }
+  # Mobile Coffee Events: real event setups (Images from Client)
+  @{ src="att.";      dir="client"; out="events/cart-canopy-lawn";    w=@(480,960) }
+  @{ src="IMG_2721";  dir="client"; out="events/cart-covered-patio";  w=@(480,960) }
+  # Package cards (coffee mood images)
   @{ src="720823189"; out="events/pkg-latte-tray";  w=@(480,960) }
   @{ src="795661510"; out="events/pkg-latte-golden-hour"; w=@(480,960) }
   @{ src="611988043"; out="events/pkg-iced-latte";  w=@(480,960) }
@@ -93,6 +101,7 @@ function Fix-Orientation($img) {
 
 function Save-Resized($img, $rect, $w, $h, $path) {
   $bmp = New-Object System.Drawing.Bitmap $w, $h
+  $bmp.SetResolution(96, 96)   # fixed DPI metadata, so re-runs produce identical files
   $g = [System.Drawing.Graphics]::FromImage($bmp)
   $g.InterpolationMode  = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
   $g.SmoothingMode      = [System.Drawing.Drawing2D.SmoothingMode]::HighQuality
@@ -106,12 +115,29 @@ function Save-Resized($img, $rect, $w, $h, $path) {
   $g.Dispose(); $bmp.Dispose()
 }
 
-foreach ($m in $manifest) {
-  $file = Get-ChildItem $srcDir -Filter "$($m.src)*.jpg" | Select-Object -First 1
-  if (-not $file) { Write-Warning "Missing source: $($m.src)"; continue }
-
+# HEIF/HEIC (iPhone) files: decode with the Windows imaging codec, hand over as a Bitmap
+function Load-Image($file) {
+  if ($file.Extension -match '^\.(heif|heic)$') {
+    $bi = New-Object System.Windows.Media.Imaging.BitmapImage
+    $bi.BeginInit(); $bi.UriSource = New-Object Uri($file.FullName); $bi.CacheOption = 'OnLoad'; $bi.EndInit()
+    $enc = New-Object System.Windows.Media.Imaging.PngBitmapEncoder
+    $enc.Frames.Add([System.Windows.Media.Imaging.BitmapFrame]::Create($bi))
+    $ms = New-Object IO.MemoryStream; $enc.Save($ms); $ms.Position = 0
+    return [System.Drawing.Bitmap]::FromStream($ms)
+  }
   $img = [System.Drawing.Image]::FromFile($file.FullName)
   Fix-Orientation $img
+  return $img
+}
+
+foreach ($m in $manifest) {
+  $dir = if ($m.dir -eq "client") { $clientDir } else { $srcDir }
+  $file = Get-ChildItem -LiteralPath $dir -File |
+    Where-Object { $_.Name.StartsWith($m.src) -and $_.Extension -match '^\.(jpe?g|heif|heic)$' } |
+    Sort-Object Name | Select-Object -First 1
+  if (-not $file) { Write-Warning "Missing source: $($m.src)"; continue }
+
+  $img = Load-Image $file
 
   if ($m.crop) {
     $rect = New-Object System.Drawing.RectangleF ($m.crop[0]*$img.Width), ($m.crop[1]*$img.Height), ($m.crop[2]*$img.Width), ($m.crop[3]*$img.Height)
@@ -213,6 +239,7 @@ $markTrim = $markInk.Clone($mb, $markInk.PixelFormat); $markInk.Dispose(); $mark
 
 function New-Icon($art, $size, $fill, $rounded) {
   $b = New-Object System.Drawing.Bitmap $size, $size, ([System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
+  $b.SetResolution(96, 96)
   $g = [System.Drawing.Graphics]::FromImage($b)
   $g.SmoothingMode = [System.Drawing.Drawing2D.SmoothingMode]::AntiAlias
   $g.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
@@ -272,6 +299,7 @@ $g.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQuality
 $g.DrawImage($logo, (New-Object System.Drawing.Rectangle 0, 0, $ms, $ms), $markRect.X, $markRect.Y, $markRect.Width, $markRect.Height, [System.Drawing.GraphicsUnit]::Pixel)
 $g.Dispose()
 $png = New-Object System.Drawing.Bitmap $ms, $ms, ([System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
+$png.SetResolution(96, 96)
 for ($y = 0; $y -lt $ms; $y++) { for ($x = 0; $x -lt $ms; $x++) {
   $c = $tmp.GetPixel($x, $y)
   $a = 255 - [int](($c.R + $c.G + $c.B) / 3)
