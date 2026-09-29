@@ -253,7 +253,7 @@ p:last-child{ margin-bottom: 0; }
   display: flex; align-items: center; justify-content: space-between; gap: var(--gap-md);
 }
 
-.brand{ display: inline-flex; align-items: center; gap: 0.6rem; text-decoration: none; min-width: 0; }
+.brand{ display: inline-flex; align-items: center; gap: 0.6rem; min-height: 44px; text-decoration: none; min-width: 0; }
 .brand-mark{ width: 40px; height: 40px; }
 .brand-text{
   font-family: var(--font-display); font-weight: 500; font-size: 1.35rem;
@@ -535,6 +535,7 @@ p:last-child{ margin-bottom: 0; }
 .menu-cat h3{ padding-bottom: 0.7rem; margin-bottom: 0.9rem; border-bottom: 1px solid var(--ink); }
 .cat-photo{ margin-bottom: 1.2rem; overflow: hidden; border-radius: var(--radius-sm); }
 .cat-photo img{ width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
+#m-espresso .cat-photo img{ object-position: 50% 62%; }
 #m-matcha .cat-photo img{ object-position: 50% 65%; }
 #m-pastries .cat-photo img{ object-position: 50% 40%; }
 
@@ -573,6 +574,7 @@ p:last-child{ margin-bottom: 0; }
 .exp-e{ grid-area: e; } .exp-f{ grid-area: f; } .exp-g{ grid-area: g; }
 .exp-h{ grid-area: h; }
 .exp-h img{ object-position: 50% 55%; }
+.exp-e img{ object-position: 50% 0%; }  /* keep the COFFEE lettering in frame */
 
 @media (max-width: 900px){
   .exp-grid{

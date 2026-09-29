@@ -29,7 +29,8 @@ $manifest = @(
 
   # Our Story
   @{ src="675176519"; out="story/barista-espresso-machine"; w=@(480,960) }
-  @{ src="600344374"; out="story/storefront-thatched-roof"; w=@(480,960,1600) }
+  # Storefront, cropped 4:3 so the café sits in the centre (less sky and pavement)
+  @{ src="600344374"; out="story/storefront-thatched-roof"; crop=@(0.02,0.13,0.80,0.80); w=@(480,960,1600) }
   @{ src="601854507"; out="story/rattan-seating-nook";      w=@(480,960) }
   @{ src="602335049"; out="story/pendant-lights-arch";      w=@(480,960) }
   @{ src="601457202"; out="story/coffee-bar-pastry-fridge"; w=@(480,960) }
@@ -43,20 +44,20 @@ $manifest = @(
   @{ src="603863609"; out="menu/butter-croissant";       w=@(480,960) }
   @{ src="615782441"; out="menu/blueberry-cheesecake";   w=@(480,960) }
   @{ src="749330169"; out="menu/matcha-cookies";         w=@(480,960) }
-  @{ src="778972777"; out="menu/long-black-and-latte";   w=@(480,960) }
-  @{ src="690854093"; out="menu/matcha-latte-hot";       w=@(480,960) }
+  @{ src="749355219"; out="menu/coffee-served-on-tray";  w=@(480,960) }
+  @{ src="690854093_edited"; out="menu/matcha-latte-hot";       w=@(480,960) }
   @{ src="601433788"; out="menu/pastry-case";            w=@(480,960) }
   @{ src="612463648"; out="menu/turkey-cheese-sandwich"; w=@(480,960) }
 
   # Zayn Experience
   @{ src="601436075"; out="experience/window-bar-arch";    w=@(480,960) }
   @{ src="602390018"; out="experience/dining-room";        w=@(480,960) }
-  @{ src="718075932"; out="experience/doorway-night";      w=@(480,960) }
+  @{ src="604525695"; out="experience/coffee-sign-cacti";  w=@(480,960) }
   @{ src="602322424"; out="experience/backlit-seating";    w=@(480,960) }
   @{ src="600286684"; out="experience/window-table";       w=@(480,960) }
   @{ src="527737296"; out="experience/espresso-machine";   w=@(480,960) }
   @{ src="603925583"; out="experience/bar-station";        w=@(480,960) }
-  @{ src="603881604"; out="experience/cup-on-metal-table"; w=@(480,960) }
+  @{ src="602474075"; out="experience/cup-dappled-light";  w=@(480,960) }
 
   # Merchandise (PENDING CLIENT CONFIRMATION of product match)
   @{ src="678935518"; out="merch/coffee-beans";     w=@(480,960) }
@@ -65,11 +66,11 @@ $manifest = @(
   # Mobile Coffee Events (temporary mood image, not an event photo)
   @{ src="602317368"; out="events/branded-cups";    w=@(480,960) }
   @{ src="720823189"; out="events/pkg-latte-tray";  w=@(480,960) }
-  @{ src="721169758"; out="events/pkg-latte-water"; w=@(480,960) }
+  @{ src="795661510"; out="events/pkg-latte-golden-hour"; w=@(480,960) }
   @{ src="611988043"; out="events/pkg-iced-latte";  w=@(480,960) }
 
   # Visit + final CTA
-  @{ src="604525695"; out="visit/coffee-sign-cacti"; w=@(480,960) }
+  @{ src="718075932"; out="visit/doorway-night";   w=@(480,960) }
   @{ src="600883003"; out="cta/storefront-night";    w=@(960,1600,2048) }
 
   # Brand + social preview
@@ -140,29 +141,128 @@ foreach ($m in $manifest) {
   $img.Dispose()
 }
 
-# ---- Favicons: thumbs-up mark on brand cream, written to /assets/icons ----
+# ---- Brand + favicons, all made from the official "Zayn Logo" file ----
+# Small tab icons use the logo's thumbs-up mark (the ZAYN COFFEE wording is
+# unreadable at 16-48px); larger icons use the full logo. Proportions are kept.
+Add-Type -ReferencedAssemblies System.Drawing -TypeDefinition @"
+using System; using System.Drawing; using System.Drawing.Imaging; using System.Runtime.InteropServices;
+public static class LogoAlpha {
+  // Black-on-white artwork -> ink-coloured artwork on transparency (alpha = darkness)
+  public static Bitmap Make(Bitmap src, int r, int g, int b) {
+    int w = src.Width, h = src.Height;
+    var s = src.Clone(new Rectangle(0, 0, w, h), PixelFormat.Format32bppArgb);
+    var d = s.LockBits(new Rectangle(0, 0, w, h), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
+    byte[] p = new byte[d.Stride * h]; Marshal.Copy(d.Scan0, p, 0, p.Length);
+    for (int i = 0; i < p.Length; i += 4) {
+      int a = 255 - (p[i] + p[i + 1] + p[i + 2]) / 3;
+      a = Math.Min(255, Math.Max(0, (a - 12) * 255 / 230));   // clean near-white paper
+      p[i] = (byte)b; p[i + 1] = (byte)g; p[i + 2] = (byte)r; p[i + 3] = (byte)a;
+    }
+    Marshal.Copy(p, 0, d.Scan0, p.Length); s.UnlockBits(d); return s;
+  }
+  static byte[] Alpha(Bitmap b, out int stride) {
+    var d = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
+    stride = d.Stride; byte[] p = new byte[d.Stride * b.Height]; Marshal.Copy(d.Scan0, p, 0, p.Length); b.UnlockBits(d); return p;
+  }
+  // Bounding box of visible artwork (alpha > 24)
+  public static Rectangle Bounds(Bitmap b) {
+    int st; byte[] p = Alpha(b, out st); int x0 = b.Width, y0 = b.Height, x1 = 0, y1 = 0;
+    for (int y = 0; y < b.Height; y++) for (int x = 0; x < b.Width; x++)
+      if (p[y * st + x * 4 + 3] > 24) { if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; }
+    return new Rectangle(x0, y0, x1 - x0 + 1, y1 - y0 + 1);
+  }
+  // Thicken strokes (circular max filter on alpha) so tiny icons stay legible
+  public static Bitmap Embolden(Bitmap src, int r) {
+    int w = src.Width, h = src.Height, st; byte[] p = Alpha(src, out st);
+    var outB = (Bitmap)src.Clone();
+    var d = outB.LockBits(new Rectangle(0, 0, w, h), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
+    byte[] q = new byte[d.Stride * h]; Marshal.Copy(d.Scan0, q, 0, q.Length);
+    for (int y = 0; y < h; y++) for (int x = 0; x < w; x++) {
+      int m = 0;
+      for (int dy = -r; dy <= r; dy++) { int yy = y + dy; if (yy < 0 || yy >= h) continue;
+        for (int dx = -r; dx <= r; dx++) { int xx = x + dx; if (xx < 0 || xx >= w || dx * dx + dy * dy > r * r) continue;
+          int a = p[yy * st + xx * 4 + 3]; if (a > m) m = a; } }
+      q[y * d.Stride + x * 4 + 3] = (byte)m;
+    }
+    Marshal.Copy(q, 0, d.Scan0, q.Length); outB.UnlockBits(d); return outB;
+  }
+}
+"@
+
 $iconDir = Join-Path $root "assets\icons"
 New-Item -ItemType Directory -Force $iconDir | Out-Null
 $logo = [System.Drawing.Image]::FromFile((Get-ChildItem $srcDir -Filter "Zayn Logo*.jpg" | Select-Object -First 1).FullName)
 $markRect = New-Object System.Drawing.RectangleF (0.24*$logo.Width), (0.06*$logo.Height), (0.60*$logo.Width), (0.60*$logo.Height)
 $cream = [System.Drawing.Color]::FromArgb(247,240,228)
-foreach ($icon in @(@{n="favicon-32.png";s=32;p=0.08}, @{n="apple-touch-icon.png";s=180;p=0.16}, @{n="icon-512.png";s=512;p=0.16})) {
-  $s = $icon.s; $pad = [int]($s * $icon.p)
-  $bmp = New-Object System.Drawing.Bitmap $s, $s
-  $g = [System.Drawing.Graphics]::FromImage($bmp)
-  $g.Clear($cream)
+
+function Crop-Bitmap($img, $rect, $size) {
+  $b = New-Object System.Drawing.Bitmap $size, $size
+  $g = [System.Drawing.Graphics]::FromImage($b); $g.Clear([System.Drawing.Color]::White)
   $g.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
-  # Multiply-style: draw the black-on-white mark, then knock white to cream
-  $inner = $s - 2*$pad
-  $scale = [math]::Min($inner / $markRect.Width, $inner / $markRect.Height)
-  $dw = [int]($markRect.Width * $scale); $dh = [int]($markRect.Height * $scale)
-  $attr = New-Object System.Drawing.Imaging.ImageAttributes
-  $attr.SetColorKey([System.Drawing.Color]::FromArgb(200,200,200), [System.Drawing.Color]::White)
-  $g.DrawImage($logo, (New-Object System.Drawing.Rectangle ([int](($s-$dw)/2)), ([int](($s-$dh)/2)), $dw, $dh), $markRect.X, $markRect.Y, $markRect.Width, $markRect.Height, [System.Drawing.GraphicsUnit]::Pixel, $attr)
-  $bmp.Save((Join-Path $iconDir $icon.n), [System.Drawing.Imaging.ImageFormat]::Png)
-  $g.Dispose(); $bmp.Dispose()
+  $g.DrawImage($img, (New-Object System.Drawing.Rectangle 0, 0, $size, $size), $rect.X, $rect.Y, $rect.Width, $rect.Height, [System.Drawing.GraphicsUnit]::Pixel)
+  $g.Dispose(); return $b
+}
+# Ink (#241A12) artwork on transparency: the thumbs-up mark, and the full logo
+$markInk = [LogoAlpha]::Make((Crop-Bitmap $logo $markRect 600), 36, 26, 18)
+$fullRect = New-Object System.Drawing.RectangleF 0, 0, $logo.Width, $logo.Height
+$logoInkRaw = [LogoAlpha]::Make((Crop-Bitmap $logo $fullRect 900), 36, 26, 18)
+# Trim to the visible artwork so icons aren't shrunk by the file's own margins
+$lb = [LogoAlpha]::Bounds($logoInkRaw)
+$logoInk = $logoInkRaw.Clone($lb, $logoInkRaw.PixelFormat); $logoInkRaw.Dispose()
+$mb = [LogoAlpha]::Bounds($markInk)
+$markTrim = $markInk.Clone($mb, $markInk.PixelFormat); $markInk.Dispose(); $markInk = $markTrim
+
+function New-Icon($art, $size, $fill, $rounded) {
+  $b = New-Object System.Drawing.Bitmap $size, $size, ([System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
+  $g = [System.Drawing.Graphics]::FromImage($b)
+  $g.SmoothingMode = [System.Drawing.Drawing2D.SmoothingMode]::AntiAlias
+  $g.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
+  $g.PixelOffsetMode = [System.Drawing.Drawing2D.PixelOffsetMode]::HighQuality
+  $brush = New-Object System.Drawing.SolidBrush $cream
+  if ($rounded) {
+    $r = [math]::Max(3, [int]($size * 0.22)); $d = 2 * $r
+    $path = New-Object System.Drawing.Drawing2D.GraphicsPath
+    $path.AddArc(0, 0, $d, $d, 180, 90); $path.AddArc($size - $d - 1, 0, $d, $d, 270, 90)
+    $path.AddArc($size - $d - 1, $size - $d - 1, $d, $d, 0, 90); $path.AddArc(0, $size - $d - 1, $d, $d, 90, 90)
+    $path.CloseFigure(); $g.FillPath($brush, $path)
+  } else { $g.FillRectangle($brush, 0, 0, $size, $size) }
+  $inner = [int]($size * $fill)
+  $scale = [math]::Min($inner / $art.Width, $inner / $art.Height)
+  $dw = [int]($art.Width * $scale); $dh = [int]($art.Height * $scale)
+  $g.DrawImage($art, [int](($size - $dw) / 2), [int](($size - $dh) / 2), $dw, $dh)
+  $g.Dispose(); return $b
+}
+
+# Browser-tab icons: mark on a cream rounded square (legible on light and dark tabs)
+$icoPngs = @()
+# Line weight is thickened slightly at 16/32px only, so the outline holds as solid pixels
+$markBold16 = [LogoAlpha]::Embolden($markInk, 11); $markBold32 = [LogoAlpha]::Embolden($markInk, 5)
+foreach ($s in 16, 32, 48) {
+  $art = switch ($s) { 16 { $markBold16 } 32 { $markBold32 } default { $markInk } }
+  $b = New-Icon $art $s 0.84 $true
+  $path = Join-Path $iconDir "favicon-$s.png"; $b.Save($path, [System.Drawing.Imaging.ImageFormat]::Png); $b.Dispose()
+  $icoPngs += ,@($s, [IO.File]::ReadAllBytes($path)); Write-Output "icons/favicon-$s.png"
+}
+# favicon.ico at the site root (browsers request /favicon.ico automatically); PNG-compressed entries
+$icoPath = Join-Path $root "favicon.ico"
+$fs = [IO.File]::Create($icoPath); $bw = New-Object IO.BinaryWriter $fs
+$bw.Write([uint16]0); $bw.Write([uint16]1); $bw.Write([uint16]$icoPngs.Count)
+$offset = 6 + 16 * $icoPngs.Count
+foreach ($e in $icoPngs) {
+  $bw.Write([byte]$e[0]); $bw.Write([byte]$e[0]); $bw.Write([byte]0); $bw.Write([byte]0)
+  $bw.Write([uint16]1); $bw.Write([uint16]32); $bw.Write([uint32]$e[1].Length); $bw.Write([uint32]$offset)
+  $offset += $e[1].Length
+}
+foreach ($e in $icoPngs) { $bw.Write([byte[]]$e[1]) }
+$bw.Close(); Write-Output "favicon.ico (16, 32, 48)"
+
+# Home-screen / app icons: full logo (mark + ZAYN COFFEE) on cream; iOS/Android round the corners
+foreach ($icon in @(@{n="apple-touch-icon.png";s=180;f=0.66}, @{n="icon-192.png";s=192;f=0.62}, @{n="icon-512.png";s=512;f=0.62})) {
+  $b = New-Icon $logoInk $icon.s $icon.f $false
+  $b.Save((Join-Path $iconDir $icon.n), [System.Drawing.Imaging.ImageFormat]::Png); $b.Dispose()
   Write-Output "icons/$($icon.n)"
 }
+$markInk.Dispose(); $logoInk.Dispose(); $markBold16.Dispose(); $markBold32.Dispose()
 
 # ---- Transparent brand mark (black mark, alpha from darkness) for use on any background ----
 $ms = 160
