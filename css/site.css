@@ -645,21 +645,26 @@ p:last-child{ margin-bottom: 0; }
   font-family: var(--font-display); font-weight: 400; font-size: clamp(2rem, 3.6vw, 2.9rem);
   line-height: 1.08; letter-spacing: -0.015em; margin: 0 0 clamp(1.5rem, 3vw, 2.2rem);
 }
-/* Variant chips on a collection tile (e.g. Hario V60: White / Transparent / Switch) */
+/* Variant swatches beside a featured product (Hario V60: White / Transparent / Switch) */
 [data-variant-main]{ transition: opacity 0.35s var(--ease); }
 [data-variant-main].is-swapping{ opacity: 0.35; }
-.variant-chips{ display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.6rem; }
-.variant-chips button{
-  min-height: 32px; padding: 0.3rem 0.7rem; border-radius: 100px;
-  border: 1px solid var(--line); background: none; cursor: pointer;
-  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft);
-  transition: background-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+.mf-variants{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(0.6rem, 1.4vw, 1rem); max-width: 440px; }
+.mf-variants button{ display: block; width: 100%; padding: 0; text-align: left; background: none; border: 0; cursor: pointer; }
+.mf-variants img{
+  width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: 50% 55%;
+  border-radius: var(--radius-sm); outline: 1px solid transparent; outline-offset: 3px;
+  transition: outline-color var(--dur-fast) var(--ease), opacity var(--dur-fast) var(--ease);
 }
-.variant-chips button:hover{ border-color: var(--ink); color: var(--ink); }
-.variant-chips button[aria-pressed="true"]{ background: var(--ink); border-color: var(--ink); color: var(--cream); }
-
-/* Collection row: four products with a gentle stagger */
-.merch-grid{ display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.6rem); margin-bottom: 2rem; }
+.mf-variants button[aria-pressed="false"] img{ opacity: 0.7; }
+.mf-variants button:hover img{ opacity: 1; }
+.mf-variants button[aria-pressed="true"] img{ outline-color: var(--ink); opacity: 1; }
+.mf-variants span{
+  display: block; margin-top: 0.6rem; font-size: var(--fs-label); font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-soft);
+}
+.merch-feature--v60 .mf-main img{ object-position: 50% 55%; }
+/* Collection row: three products with a gentle stagger */
+.merch-grid{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.6rem); margin-bottom: 2rem; }
 .merch-item img, .merch-type{ width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: 50% 55%; border-radius: var(--radius-sm); }
 .merch-item:nth-child(even){ margin-top: clamp(1.5rem, 3.5vw, 3rem); }
 .merch-type{
@@ -684,12 +689,18 @@ p:last-child{ margin-bottom: 0; }
     padding: 0 var(--gutter) 0.5rem; scroll-padding: 0 var(--gutter);
   }
   .merch-grid::-webkit-scrollbar{ display: none; }
-  .merch-item{ flex: 0 0 34%; scroll-snap-align: start; }
+  .merch-item{ flex: 0 0 calc((100% - 2rem) / 3); scroll-snap-align: start; }
   .merch-item:nth-child(even){ margin-top: 0; }
 }
 @media (max-width: 600px){
   .merch-item{ flex-basis: 62%; }
   .merch-feature{ grid-template-columns: 1fr; gap: 1.6rem; }
+  .merch-feature--v60{ grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 1rem; align-items: start; }
+  .merch-feature--v60 .mf-label{ margin-bottom: 0.5rem; }
+  .merch-feature--v60 .mf-name{ font-size: 1.35rem; margin-bottom: 1rem; }
+  .merch-feature--v60 .mf-variants{ grid-template-columns: 1fr; gap: 0.7rem; }
+  .merch-feature--v60 .mf-variants img{ aspect-ratio: 4 / 3; }
+  .merch-feature--v60 .mf-variants span{ margin-top: 0.35rem; letter-spacing: 0.1em; }
   .merch-name{ font-size: 1.05rem; }
 }
 
