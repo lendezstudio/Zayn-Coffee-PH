@@ -61,7 +61,8 @@ $manifest = @(
   @{ src="601433788"; out="menu/pastry-case";            w=@(480,960) }
 
   # Cafe gallery (Zayn Experience): client photos of the space, bar, coffee and entrance
-  @{ src="IMG_3623";     dir="client"; out="gallery/window-table-rattan";   w=@(480,960) }
+  # Window table: crop off the plain wall on the left and the edge on the right
+  @{ src="IMG_3623";     dir="client"; out="gallery/window-table-rattan"; crop=@(0.12,0,0.85,1); w=@(480,960) }
   @{ src="IMG_3618";     dir="client"; out="gallery/window-bar-cacti";      w=@(480,960) }
   @{ src="IMG_3619";     dir="client"; out="gallery/need-more-coffee-wall"; w=@(480,960) }
   @{ src="IMG_3616";     dir="client"; out="gallery/coffee-bar";            w=@(480,960) }

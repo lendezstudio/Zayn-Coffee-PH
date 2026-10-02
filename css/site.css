@@ -488,7 +488,6 @@ p:last-child{ margin-bottom: 0; }
 .fav--lead img{ flex: 1; aspect-ratio: auto; min-height: 0; }
 .fav-name{ font-family: var(--font-display); font-size: 1.15rem; color: var(--ink); margin: 0.8rem 0 0.1rem; line-height: 1.25; }
 .fav--lead .fav-name{ font-size: clamp(1.4rem, 2.2vw, 1.8rem); }
-.fav-price{ font-weight: 600; font-size: 0.93rem; color: var(--terracotta-text); margin: 0; }
 
 @media (max-width: 900px){
   .favorites{ grid-template-columns: 1fr 1fr; }
