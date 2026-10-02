@@ -33,11 +33,11 @@ $manifest = @(
 
   # Our Story
   @{ src="675176519"; out="story/barista-espresso-machine"; w=@(480,960) }
-  # Storefront, cropped 4:3 so the café sits in the centre (less sky and pavement)
-  @{ src="600344374"; out="story/storefront-thatched-roof"; crop=@(0.02,0.13,0.80,0.80); w=@(480,960,1600) }
+  # Thatched-roof tile: client photo of the entrance under the thatched roof
+  @{ src="IMG_5902";  dir="client"; out="story/entrance-thatched-roof"; w=@(480,960) }
   @{ src="601854507"; out="story/rattan-seating-nook";      w=@(480,960) }
   @{ src="602335049"; out="story/pendant-lights-arch";      w=@(480,960) }
-  @{ src="601457202"; out="story/coffee-bar-pastry-fridge"; w=@(480,960) }
+  @{ src="IMG_3621";  dir="client"; out="story/table-dried-flowers"; w=@(480,960) }
   # Materials strip (whole photos, uncropped)
   @{ src="601814454"; out="story/textured-cream-wall";      w=@(480,960) }
   @{ src="676023496"; out="story/metal-tables";             w=@(480,960) }
@@ -45,29 +45,38 @@ $manifest = @(
   # Menu: drinks named by Zayn Coffee in their filenames (Images from Client)
   @{ src="Cinnamon Latt";      dir="client"; out="menu/cinnamon-latte";      w=@(480,960) }
   @{ src="Iced spanish Latt";  dir="client"; out="menu/spanish-latte-iced";  w=@(480,960) }
-  @{ src="Sea salt matcha";    dir="client"; out="menu/sea-salt-matcha";     w=@(480,960) }
+  @{ src="Iced caff";          dir="client"; out="menu/cafe-latte-iced";     w=@(480,960) }
   @{ src="Cold brew";          dir="client"; out="menu/cold-brew";           w=@(480,960) }
   @{ src="Mont Blanc";         dir="client"; out="menu/mont-blanc";          w=@(480,960) }
   @{ src="Hot V60";            dir="client"; out="menu/hot-v60";             w=@(480,960) }
   @{ src="Iced Japanese Pour"; dir="client"; out="menu/iced-japanese-v60";   w=@(480,960) }
-  @{ src="Matcha Pink";        dir="client"; out="menu/matcha-pink";         w=@(480,960) }
+  @{ src="Matcha Orange";      dir="client"; out="menu/matcha-orange";       w=@(480,960) }
+  @{ src="Iced Long Black";    dir="client"; out="menu/iced-long-black";     w=@(480,960) }
+  @{ src="IMG_3620";           dir="client"; out="menu/toasted-sandwich";    w=@(480,960) }
   # Menu: earlier photos (photo-to-item matches PENDING CLIENT CONFIRMATION)
-  @{ src="603863609"; out="menu/butter-croissant";       w=@(480,960) }
+  @{ src="680132209"; out="menu/cinnamon-rolls";         w=@(480,960) }
   @{ src="749330169"; out="menu/matcha-cookies";         w=@(480,960) }
   @{ src="749355219"; out="menu/coffee-served-on-tray";  w=@(480,960) }
   @{ src="690854093_edited"; out="menu/matcha-latte-hot";       w=@(480,960) }
   @{ src="601433788"; out="menu/pastry-case";            w=@(480,960) }
-  @{ src="612463648"; out="menu/turkey-cheese-sandwich"; w=@(480,960) }
 
-  # Zayn Experience (editorial composition, led by the client's daytime storefront)
-  @{ src="IMG_5901";  dir="client"; out="experience/storefront-daytime"; w=@(480,960,1600) }
-  @{ src="601436075"; out="experience/window-bar-arch";    w=@(480,960) }
-  @{ src="602390018"; out="experience/dining-room";        w=@(480,960) }
-  @{ src="527737296"; out="experience/espresso-machine";   w=@(480,960) }
-  @{ src="602474075"; out="experience/cup-dappled-light";  w=@(480,960) }
+  # Cafe gallery (Zayn Experience): client photos of the space, bar, coffee and entrance
+  @{ src="IMG_3623";     dir="client"; out="gallery/window-table-rattan";   w=@(480,960) }
+  @{ src="IMG_3618";     dir="client"; out="gallery/window-bar-cacti";      w=@(480,960) }
+  @{ src="IMG_3619";     dir="client"; out="gallery/need-more-coffee-wall"; w=@(480,960) }
+  @{ src="IMG_3616";     dir="client"; out="gallery/coffee-bar";            w=@(480,960) }
+  @{ src="IMG_3578";     dir="client"; out="gallery/seating-life-happens";  w=@(480,960,1600) }
+  @{ src="721387732";    out="gallery/latte-art-cup";         w=@(480,960) }
+  @{ src="718075932";    out="gallery/doorway-night";           w=@(480,960) }
 
-  # Merchandise (PENDING CLIENT CONFIRMATION of product match)
+  # Merchandise (client product photos; beans photo PENDING CLIENT CONFIRMATION)
   @{ src="678935518"; out="merch/coffee-beans";     w=@(480,960) }
+  @{ src="V60 dripper (whitecolor)";  dir="client"; out="merch/v60-white";  w=@(480,960) }
+  @{ src="V60 dripper (transparent)"; dir="client"; out="merch/v60-clear";  w=@(480,960) }
+  @{ src="Switch V60";                dir="client"; out="merch/v60-switch"; w=@(480,960) }
+  @{ src="Zayn Coffee Decanter";      dir="client"; out="merch/decanter";   w=@(480,960) }
+  @{ src="Zayn Coffee Glass";         dir="client"; out="merch/glass";      w=@(480,960) }
+  @{ src="IMG_3563";                  dir="client"; out="merch/tshirts";    w=@(480,960,1600) }
 
   # Mobile Coffee Events: real event setups (Images from Client)
   @{ src="att.";      dir="client"; out="events/cart-canopy-lawn";    w=@(480,960) }
@@ -78,8 +87,10 @@ $manifest = @(
   @{ src="611988043"; out="events/pkg-iced-latte";  w=@(480,960) }
 
   # Visit + final CTA
-  @{ src="718075932"; out="visit/doorway-night";   w=@(480,960) }
-  @{ src="600883003"; out="cta/storefront-night";    w=@(960,1600,2048) }
+  @{ src="IMG_5459";  dir="client"; out="visit/storefront-sunny"; w=@(480,960) }
+  @{ src="IMG_5921."; dir="client"; out="cta/storefront-dusk";    w=@(960,1600,2048) }
+  # Night doorway: no longer on the page, kept because tools/og-template.html uses it
+  @{ src="718075932"; out="visit/doorway-night";   w=@(960) }
 
   # (Social preview image is rendered separately by tools/make-og-image.ps1)
 )
@@ -133,7 +144,7 @@ function Load-Image($file) {
 foreach ($m in $manifest) {
   $dir = if ($m.dir -eq "client") { $clientDir } else { $srcDir }
   $file = Get-ChildItem -LiteralPath $dir -File |
-    Where-Object { $_.Name.StartsWith($m.src) -and $_.Extension -match '^\.(jpe?g|heif|heic)$' } |
+    Where-Object { $_.Name.StartsWith($m.src) -and $_.Extension -match '^\.(jpe?g|png|heif|heic)$' } |
     Sort-Object Name | Select-Object -First 1
   if (-not $file) { Write-Warning "Missing source: $($m.src)"; continue }
 

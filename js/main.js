@@ -103,6 +103,29 @@
   spy(Array.prototype.slice.call(document.querySelectorAll(".nav-links a")), "-45% 0px -50% 0px");
   spy(Array.prototype.slice.call(document.querySelectorAll(".menu-jump a")), "-30% 0px -60% 0px");
 
+  /* ---- Merchandise: variant chips swap the product photo ---- */
+  document.querySelectorAll("[data-variants]").forEach(function (feature) {
+    var main = feature.querySelector("[data-variant-main]");
+    var buttons = feature.querySelectorAll("button[data-img]");
+    if (!main || !buttons.length) return;
+    buttons.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        if (btn.getAttribute("aria-pressed") === "true") return;
+        buttons.forEach(function (b) { b.setAttribute("aria-pressed", b === btn ? "true" : "false"); });
+        var base = btn.getAttribute("data-img");
+        main.classList.add("is-swapping");
+        var next = new Image();
+        next.onload = next.onerror = function () {
+          main.srcset = base + "-480.jpg 480w, " + base + "-960.jpg 960w";
+          main.src = base + "-960.jpg";
+          main.alt = btn.getAttribute("data-alt");
+          main.classList.remove("is-swapping");
+        };
+        next.src = base + "-960.jpg";
+      });
+    });
+  });
+
   /* ---- Footer year ---- */
   document.querySelectorAll("[data-year]").forEach(function (el) {
     el.textContent = new Date().getFullYear();
