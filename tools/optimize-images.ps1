@@ -90,10 +90,9 @@ $manifest = @(
   # Visit + final CTA
   @{ src="IMG_5459";  dir="client"; out="visit/storefront-sunny"; w=@(480,960) }
   @{ src="IMG_5921."; dir="client"; out="cta/storefront-dusk";    w=@(960,1600,2048) }
-  # Night doorway: no longer on the page, kept because tools/og-template.html uses it
-  @{ src="718075932"; out="visit/doorway-night";   w=@(960) }
 
-  # (Social preview image is rendered separately by tools/make-og-image.ps1)
+  # Social preview sources (image itself is rendered by tools/make-og-image.ps1)
+  @{ src="Cinnamon Latt"; dir="client"; out="og/src-coffee-window"; w=@(960) }
 )
 
 $jpeg = [System.Drawing.Imaging.ImageCodecInfo]::GetImageEncoders() | Where-Object { $_.MimeType -eq "image/jpeg" }
