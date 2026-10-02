@@ -43,7 +43,7 @@ $manifest = @(
   @{ src="676023496"; out="story/metal-tables";             w=@(480,960) }
 
   # Menu: drinks named by Zayn Coffee in their filenames (Images from Client)
-  @{ src="Cinnamon Latt";      dir="client"; out="menu/cinnamon-latte";      w=@(480,960) }
+  @{ src="615782441"; out="menu/latte-cheesecake-tray";  w=@(480,960) }
   @{ src="Iced spanish Latt";  dir="client"; out="menu/spanish-latte-iced";  w=@(480,960) }
   @{ src="Iced caff";          dir="client"; out="menu/cafe-latte-iced";     w=@(480,960) }
   @{ src="Cold brew";          dir="client"; out="menu/cold-brew";           w=@(480,960) }
