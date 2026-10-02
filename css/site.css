@@ -599,7 +599,7 @@ p:last-child{ margin-bottom: 0; }
 .g-sign{ grid-area: c; }
 .g-sign img{ object-position: 72% 40%; }   /* keep the wall graphic in frame */
 .g-cup{ grid-area: e; }
-.g-cup img{ object-position: 50% 55%; }
+.g-cup img{ object-position: 50% 50%; }
 .g-seat{ grid-area: f; }
 .g-seat img{ object-position: 50% 58%; }   /* sign + bench both visible */
 .g-bar{ grid-area: d; }

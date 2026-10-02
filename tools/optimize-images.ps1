@@ -66,7 +66,8 @@ $manifest = @(
   @{ src="IMG_3619";     dir="client"; out="gallery/need-more-coffee-wall"; w=@(480,960) }
   @{ src="IMG_3616";     dir="client"; out="gallery/coffee-bar";            w=@(480,960) }
   @{ src="IMG_3578";     dir="client"; out="gallery/seating-life-happens";  w=@(480,960,1600) }
-  @{ src="721387732";    out="gallery/latte-art-cup";         w=@(480,960) }
+  # Latte cup: crop away empty space above so the cup sits centred in the tile
+  @{ src="721387732";    out="gallery/latte-art-cup"; crop=@(0.06,0.24,0.78,0.76); w=@(480,900) }
   @{ src="718075932";    out="gallery/doorway-night";           w=@(480,960) }
 
   # Merchandise (client product photos; beans photo PENDING CLIENT CONFIRMATION)
