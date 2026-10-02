@@ -695,12 +695,15 @@ p:last-child{ margin-bottom: 0; }
 @media (max-width: 600px){
   .merch-item{ flex-basis: 62%; }
   .merch-feature{ grid-template-columns: 1fr; gap: 1.6rem; }
-  .merch-feature--v60{ grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 1rem; align-items: start; }
-  .merch-feature--v60 .mf-label{ margin-bottom: 0.5rem; }
-  .merch-feature--v60 .mf-name{ font-size: 1.35rem; margin-bottom: 1rem; }
-  .merch-feature--v60 .mf-variants{ grid-template-columns: 1fr; gap: 0.7rem; }
-  .merch-feature--v60 .mf-variants img{ aspect-ratio: 4 / 3; }
-  .merch-feature--v60 .mf-variants span{ margin-top: 0.35rem; letter-spacing: 0.1em; }
+  /* Features on phones: name first, then a large full-width photo (V60: then its variants in a row) */
+  .merch-feature{ gap: 0; }
+  .merch-feature .mf-side{ display: contents; }
+  .merch-feature .mf-label{ order: 1; margin-bottom: 0.5rem; }
+  .merch-feature .mf-name{ order: 2; font-size: 1.9rem; margin-bottom: 1rem; }
+  .merch-feature .mf-main{ order: 3; aspect-ratio: 4 / 4.6; }
+  .merch-feature--v60 .mf-variants{ order: 4; max-width: none; margin-top: 0.9rem; gap: 0.6rem; }
+  .merch-feature--v60 .mf-variants img{ aspect-ratio: 1; }
+  .merch-feature--v60 .mf-variants span{ margin-top: 0.45rem; letter-spacing: 0.12em; text-align: center; }
   .merch-name{ font-size: 1.05rem; }
 }
 
