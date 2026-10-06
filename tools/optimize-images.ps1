@@ -102,8 +102,8 @@ $manifest = @(
   @{ src="IMG_5921."; dir="client"; out="cta/storefront-dusk";    w=@(960,1600,2048) }
 
 
-  # Social preview: IMG_3618 only, cropped to 1200x630 around the arched mirror, window and cacti
-  @{ src="IMG_3618"; dir="client"; out="og/zayn-coffee-og"; crop=@(0,0.255,1,0.415); size=@(1200,630) }
+  # Social preview photo (IMG_3618, 1200x630); the text overlay is added by tools/make-og-image.ps1
+  @{ src="IMG_3618"; dir="client"; out="og/src-window-cacti"; crop=@(0,0.255,1,0.415); size=@(1200,630) }
 )
 
 $jpeg = [System.Drawing.Imaging.ImageCodecInfo]::GetImageEncoders() | Where-Object { $_.MimeType -eq "image/jpeg" }
