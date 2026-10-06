@@ -101,8 +101,9 @@ $manifest = @(
   @{ src="IMG_5459";  dir="client"; out="visit/storefront-sunny"; w=@(480,960) }
   @{ src="IMG_5921."; dir="client"; out="cta/storefront-dusk";    w=@(960,1600,2048) }
 
-  # Social preview sources (image itself is rendered by tools/make-og-image.ps1)
-  @{ src="Cinnamon Latt"; dir="client"; out="og/src-coffee-window"; w=@(960) }
+
+  # Social preview: IMG_3618 only, cropped to 1200x630 around the arched mirror, window and cacti
+  @{ src="IMG_3618"; dir="client"; out="og/zayn-coffee-og"; crop=@(0,0.255,1,0.415); size=@(1200,630) }
 )
 
 $jpeg = [System.Drawing.Imaging.ImageCodecInfo]::GetImageEncoders() | Where-Object { $_.MimeType -eq "image/jpeg" }
