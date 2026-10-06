@@ -94,7 +94,8 @@ $manifest = @(
   # Package cards (coffee mood images)
   @{ src="720823189"; out="events/pkg-latte-tray";  w=@(480,960) }
   @{ src="795661510"; out="events/pkg-latte-golden-hour"; w=@(480,960) }
-  @{ src="Coco matcha cloud"; dir="October 5"; out="events/pkg-iced-latte"; w=@(480,960) }
+  # 150 card: crop centred on the cup (~46% across, ~52% down) so it fills the card like the others
+  @{ src="602474075"; out="events/pkg-iced-latte"; crop=@(0.12,0.175,0.69,0.69); w=@(480,960) }
 
   # Visit + final CTA
   @{ src="IMG_5459";  dir="client"; out="visit/storefront-sunny"; w=@(480,960) }
