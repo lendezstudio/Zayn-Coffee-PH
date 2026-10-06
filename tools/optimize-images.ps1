@@ -10,7 +10,7 @@
 
   To add or replace a photo: add a line to $manifest below and re-run.
     src   = start of the original filename (unique prefix)
-    dir   = optional "client" to read from /Images from Client (default /Images)
+    dir   = optional "client" (/Images from Client) or a subfolder name inside it, e.g. "October 5"
     out   = output path under assets/img, without extension
     w     = widths to generate (skipped if larger than the source)
     crop  = optional [x, y, w, h] as fractions of the source image
@@ -44,21 +44,24 @@ $manifest = @(
 
   # Menu: drinks named by Zayn Coffee in their filenames (Images from Client)
   @{ src="615782441"; out="menu/latte-cheesecake-tray";  w=@(480,960) }
-  @{ src="Iced spanish Latt";  dir="client"; out="menu/spanish-latte-iced";  w=@(480,960) }
-  @{ src="Iced caff";          dir="client"; out="menu/cafe-latte-iced";     w=@(480,960) }
-  @{ src="Cold brew";          dir="client"; out="menu/cold-brew";           w=@(480,960) }
-  @{ src="Mont Blanc";         dir="client"; out="menu/mont-blanc";          w=@(480,960) }
-  @{ src="Hot V60";            dir="client"; out="menu/hot-v60";             w=@(480,960) }
+  @{ src="E25A4363";           dir="October 5"; out="menu/spanish-latte-iced"; w=@(480,960) }
+  @{ src="Sunlit Zayn Coffee Still Life."; dir="October 5"; out="menu/cold-brew"; w=@(480,941) }
+  @{ src="Sunlit Mont Blanc"; dir="October 5"; out="menu/mont-blanc"; w=@(480,960) }
+  @{ src="Sunlit Zayn Coffee Still Life (1)"; dir="October 5"; out="menu/hot-v60"; w=@(480,960) }
   @{ src="Iced Japanese Pour"; dir="client"; out="menu/iced-japanese-v60";   w=@(480,960) }
-  @{ src="Matcha Orange";      dir="client"; out="menu/matcha-orange";       w=@(480,960) }
-  @{ src="Iced Long Black";    dir="client"; out="menu/iced-long-black";     w=@(480,960) }
+  @{ src="Matcha orange";      dir="October 5"; out="menu/matcha-orange";    w=@(480,960) }
+  @{ src="Pandan Latt";        dir="October 5"; out="menu/pandan-latte";     w=@(480,960) }
+  @{ src="Caff";               dir="October 5"; out="menu/cafe-mocha";       w=@(480,960) }
+  @{ src="Espresso shot";      dir="October 5"; out="menu/espresso-shot";    w=@(480,960) }
+  @{ src="Long balck";         dir="October 5"; out="menu/iced-long-black";  w=@(480,960) }
   @{ src="IMG_3620";           dir="client"; out="menu/toasted-sandwich";    w=@(480,960) }
   # Menu: earlier photos (photo-to-item matches PENDING CLIENT CONFIRMATION)
-  @{ src="680132209"; out="menu/cinnamon-rolls";         w=@(480,960) }
-  @{ src="749330169"; out="menu/matcha-cookies";         w=@(480,960) }
-  @{ src="749355219"; out="menu/coffee-served-on-tray";  w=@(480,960) }
+  @{ src="French butter croissant"; dir="October 5"; out="menu/butter-croissant"; w=@(480,960) }
+  @{ src="Cozy Matcha White Chocolate Cookies"; dir="October 5"; out="menu/matcha-cookies"; w=@(480,960) }
+  # Cortado: crop to the tray (cup + glass) so it sits centred, not the legs/shoes below
+  @{ src="Cortado";   dir="October 5"; out="menu/coffee-served-on-tray"; crop=@(0.12,0.19,0.72,0.675); w=@(480,770) }
   @{ src="690854093_edited"; out="menu/matcha-latte-hot";       w=@(480,960) }
-  @{ src="601433788"; out="menu/pastry-case";            w=@(480,960) }
+  @{ src="0D3F6696";  dir="October 5"; out="menu/pastry-case";   w=@(480,960) }
 
   # Cafe gallery (Zayn Experience): client photos of the space, bar, coffee and entrance
   # Window table: crop off the plain wall on the left and the edge on the right
@@ -70,23 +73,28 @@ $manifest = @(
   # Latte cup: crop away empty space above so the cup sits centred in the tile
   @{ src="721387732";    out="gallery/latte-art-cup"; crop=@(0.06,0.24,0.78,0.76); w=@(480,900) }
   @{ src="718075932";    out="gallery/doorway-night";           w=@(480,960) }
+  @{ src="Espresso extraction"; dir="October 5"; out="gallery/espresso-extraction"; w=@(480,960) }
+  @{ src="Spanish in a Bottle";  dir="October 5"; out="gallery/spanish-in-a-bottle"; w=@(480,960) }
 
-  # Merchandise (client product photos; beans photo PENDING CLIENT CONFIRMATION)
-  @{ src="678935518"; out="merch/coffee-beans";     w=@(480,960) }
-  @{ src="V60 dripper (whitecolor)";  dir="client"; out="merch/v60-white";  w=@(480,960) }
-  @{ src="V60 dripper (transparent)"; dir="client"; out="merch/v60-clear";  w=@(480,960) }
-  @{ src="Switch V60";                dir="client"; out="merch/v60-switch"; w=@(480,960) }
-  @{ src="Zayn Coffee Decanter";      dir="client"; out="merch/decanter";   w=@(480,960) }
-  @{ src="Zayn Coffee Glass";         dir="client"; out="merch/glass";      w=@(480,960) }
+  # Merchandise
+  # (T-shirts keep the original photo)
   @{ src="IMG_3563";                  dir="client"; out="merch/tshirts";    w=@(480,960,1600) }
+  # Edited product photos (Images from Client/Merchandise Edited)
+  @{ src="ChatGPT Image Oct 6, 2026, 08_17_38 PM-1"; dir="Merchandise Edited"; out="merch/edited/pins";       w=@(480,960) }
+  @{ src="ChatGPT Image Oct 6, 2026, 08_17_43 PM-3"; dir="Merchandise Edited"; out="merch/edited/v60-white";  w=@(480,960) }
+  @{ src="Sunlit Glass Hario V60 Dripper";           dir="Merchandise Edited"; out="merch/edited/v60-clear";  w=@(480,960) }
+  @{ src="Sunlit Fluted Glass Coffee Dripper";       dir="Merchandise Edited"; out="merch/edited/v60-switch"; w=@(480,960) }
+  @{ src="ChatGPT Image Oct 6, 2026, 08_29_39 PM-2"; dir="Merchandise Edited"; out="merch/edited/decanter";   w=@(480,960) }
+  @{ src="ChatGPT Image Oct 6, 2026, 08_29_37 PM-1"; dir="Merchandise Edited"; out="merch/edited/glass";      w=@(480,960) }
+  @{ src="ChatGPT Image Oct 6, 2026, 08_18_10 PM-3"; dir="Merchandise Edited"; out="merch/edited/beans";      w=@(480,960) }
 
   # Mobile Coffee Events: real event setups (Images from Client)
-  @{ src="att.";      dir="client"; out="events/cart-canopy-lawn";    w=@(480,960) }
-  @{ src="IMG_2721";  dir="client"; out="events/cart-covered-patio";  w=@(480,960) }
+  @{ src="13DFBFD3";  dir="October 5"; out="events/cart-canopy-lawn";   w=@(480,960) }
+  @{ src="A9F7238D";  dir="October 5"; out="events/cart-covered-patio"; w=@(480,960) }
   # Package cards (coffee mood images)
   @{ src="720823189"; out="events/pkg-latte-tray";  w=@(480,960) }
   @{ src="795661510"; out="events/pkg-latte-golden-hour"; w=@(480,960) }
-  @{ src="611988043"; out="events/pkg-iced-latte";  w=@(480,960) }
+  @{ src="Coco matcha cloud"; dir="October 5"; out="events/pkg-iced-latte"; w=@(480,960) }
 
   # Visit + final CTA
   @{ src="IMG_5459";  dir="client"; out="visit/storefront-sunny"; w=@(480,960) }
@@ -143,7 +151,7 @@ function Load-Image($file) {
 }
 
 foreach ($m in $manifest) {
-  $dir = if ($m.dir -eq "client") { $clientDir } else { $srcDir }
+  $dir = if ($m.dir -eq "client") { $clientDir } elseif ($m.dir) { Join-Path $clientDir $m.dir } else { $srcDir }
   $file = Get-ChildItem -LiteralPath $dir -File |
     Where-Object { $_.Name.StartsWith($m.src) -and $_.Extension -match '^\.(jpe?g|png|heif|heic)$' } |
     Sort-Object Name | Select-Object -First 1

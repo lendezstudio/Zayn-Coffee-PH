@@ -542,12 +542,16 @@ p:last-child{ margin-bottom: 0; }
   margin-top: 0.5rem; font-size: var(--fs-label); font-weight: 600;
   letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-soft);
 }
-#m-espresso .cat-photo img{ object-position: 50% 62%; }
+#m-espresso .cat-pair figure:first-child img{ object-position: 50% 50%; }   /* photo is pre-cropped to the tray */
 /* Hot V60: server + glass span ~20-78% across, ~13-55% down; centre that setup in the 4:5 frame */
-#m-filter .cat-pair figure:first-child img{ object-position: 49% 42%; }
+#m-filter .cat-pair img{ aspect-ratio: 1; }   /* landscape Hot V60 + square Iced Japanese: square tiles keep both whole */
+#m-filter .cat-pair figure:first-child img{ object-position: 49% 52%; }
+#m-coldbrew .cat-pair figure:first-child img{ object-position: 50% 85%; }   /* tall photo: cup sits ~60% down; this centres it in the frame */
+#m-coldbrew .cat-pair figure:last-child img{ object-position: 50% 62%; }
 #m-matcha .cat-pair img{ aspect-ratio: 3 / 4; }   /* both portrait: tray photo shows uncropped */
 #m-matcha .cat-pair figure:last-child img{ object-position: 50% 40%; }
-#m-pastries .cat-photo img{ object-position: 50% 40%; }
+#m-pastries .cat-photo img{ object-position: 50% 44%; }
+#m-extras .cat-photo img{ object-position: 50% 52%; }
 
 .price-list li{
   display: flex; align-items: baseline; gap: 0.5rem;
@@ -571,7 +575,7 @@ p:last-child{ margin-bottom: 0; }
    row unit, so every photo keeps a sensible proportion and the columns step down. */
 .gallery{
   display: grid; grid-template-columns: repeat(12, minmax(0, 1fr));
-  grid-template-rows: repeat(14, clamp(3.25rem, 5.4vw, 4.6rem));
+  grid-template-rows: repeat(19, clamp(3.25rem, 5.4vw, 4.6rem));
   grid-template-areas:
     "a a a a a . . . . c c c"
     "a a a a a b b b b c c c"
@@ -585,8 +589,13 @@ p:last-child{ margin-bottom: 0; }
     "f f f f f d d d d e e e"
     "f f f f f d d d d g g g"
     "f f f f f d d d d g g g"
-    "f f f f f . . . . g g g"
-    ". . . . . . . . . g g g";
+    "f f f f f h h h h g g g"
+    "i i i i i h h h h g g g"
+    "i i i i i h h h h . . ."
+    "i i i i i h h h h . . ."
+    "i i i i i h h h h . . ."
+    "i i i i i h h h h . . ."
+    "i i i i i . . . . . . .";
   gap: clamp(0.6rem, 1.2vw, 1rem);
 }
 .g{ position: relative; overflow: hidden; border-radius: var(--radius-sm); background: var(--cream); }
@@ -604,7 +613,11 @@ p:last-child{ margin-bottom: 0; }
 .g-bar{ grid-area: d; }
 .g-bar img{ object-position: 50% 45%; }
 .g-door{ grid-area: g; }
-.g-door img{ object-position: 45% 45%; }
+.g-door img{ object-position: 45% 0%; }   /* sign sits ~28% down the photo: show it as high as the frame allows */
+.g-pull{ grid-area: h; }
+.g-pull img{ object-position: 50% 50%; }
+.g-bottle{ grid-area: i; }
+.g-bottle img{ object-position: 55% 45%; }   /* bottle is the focus */
 /* Subtle zoom on devices with a real hover; touch devices keep the still image */
 @media (hover: hover) and (prefers-reduced-motion: no-preference){
   .g:hover img{ transform: scale(1.035); }
@@ -614,7 +627,7 @@ p:last-child{ margin-bottom: 0; }
 @media (max-width: 899px){
   .gallery{
     grid-template-columns: 1fr 1fr; grid-template-rows: none;
-    grid-template-areas: "a a" "b c" "f f" "d e" "g g";
+    grid-template-areas: "a a" "b c" "f f" "d e" "g g" "h i";
     gap: clamp(0.6rem, 2vw, 1rem);
   }
   .g-anchor{ aspect-ratio: 5 / 6; }
@@ -622,7 +635,8 @@ p:last-child{ margin-bottom: 0; }
   .g-seat{ aspect-ratio: 4 / 3; }
   .g-bar, .g-cup{ aspect-ratio: 4 / 5; }
   .g-door{ aspect-ratio: 16 / 10; }
-  .g-door img{ object-position: 45% 32%; }
+  .g-door img{ object-position: 45% 9%; }   /* wide frame: centres the ZAYN COFFEE sign vertically */
+  .g-pull, .g-bottle{ aspect-ratio: 4 / 5; }
   .g-seat img{ object-position: 50% 60%; }
 }
 
@@ -634,9 +648,15 @@ p:last-child{ margin-bottom: 0; }
   gap: var(--gap-lg); align-items: center;
   margin-bottom: clamp(3rem, 7vw, 5.5rem);
 }
-.mf-main{ aspect-ratio: 3 / 4; overflow: hidden; border-radius: var(--radius-sm); background: var(--cream-2); }
-.mf-main img{ width: 100%; height: 100%; object-fit: cover; object-position: 50% 55%; transition: opacity 0.35s var(--ease); }
-.mf-main img{ object-position: 50% 45%; }
+/* Products are transparent cut-outs, pre-centred on a 3:4 canvas: show them whole, straight on the page */
+.mf-main{ aspect-ratio: 3 / 4; }
+.mf-main img{ width: 100%; height: 100%; object-fit: contain; transition: opacity 0.35s var(--ease); }
+/* T-shirts keep the original photo: filled frame with rounded corners */
+.mf-main--photo{ overflow: hidden; border-radius: var(--radius-sm); background: var(--cream-2); }
+.mf-main--photo img{ object-fit: cover; object-position: 50% 45%; }
+/* Hario V60: edited product photos are ~4:5, so the frame matches and nothing important is trimmed */
+.merch-feature--v60 .mf-main{ aspect-ratio: 4 / 5; }
+.merch-feature--v60 .mf-main img{ object-position: 50% 50%; }
 .mf-label{
   font-size: var(--fs-label); font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
   color: var(--terracotta-text); margin-bottom: 0.8rem;
@@ -651,7 +671,7 @@ p:last-child{ margin-bottom: 0; }
 .mf-variants{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(0.6rem, 1.4vw, 1rem); max-width: 440px; }
 .mf-variants button{ display: block; width: 100%; padding: 0; text-align: left; background: none; border: 0; cursor: pointer; }
 .mf-variants img{
-  width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: 50% 55%;
+  width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius-sm);
   border-radius: var(--radius-sm); outline: 1px solid transparent; outline-offset: 3px;
   transition: outline-color var(--dur-fast) var(--ease), opacity var(--dur-fast) var(--ease);
 }
@@ -662,23 +682,10 @@ p:last-child{ margin-bottom: 0; }
   display: block; margin-top: 0.6rem; font-size: var(--fs-label); font-weight: 600;
   letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-soft);
 }
-.merch-feature--v60 .mf-main img{ object-position: 50% 55%; }
-/* Collection row: three products with a gentle stagger */
-.merch-grid{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.6rem); margin-bottom: 2rem; }
-.merch-item img, .merch-type{ width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: 50% 55%; border-radius: var(--radius-sm); }
-.merch-item:nth-child(even){ margin-top: clamp(1.5rem, 3.5vw, 3rem); }
-.merch-type{
-  position: relative; display: flex; align-items: center; justify-content: center; padding: 1.5rem;
-  background-color: var(--cream-2); background-image: var(--grain);
-}
-.merch-type::before{ content: ''; position: absolute; inset: 12px; border: 1px solid var(--line); border-radius: 4px; }
-.merch-type::after{ content: ''; position: absolute; width: 58%; aspect-ratio: 1; border-radius: 50%; border: 1px solid var(--thatch); opacity: 0.3; }
-.merch-type span{
-  position: relative; z-index: 1;
-  font-family: var(--font-display); font-style: italic; font-weight: 350;
-  font-size: clamp(1.5rem, 2.6vw, 2.1rem); color: var(--thatch); text-align: center; line-height: 1.1;
-}
-.merch-name{ font-family: var(--font-display); font-size: 1.15rem; color: var(--ink); margin: 0.9rem 0 0; line-height: 1.25; }
+/* Collection row: four products, evenly aligned */
+.merch-grid{ display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.6rem); margin-bottom: 2rem; }
+.merch-item img{ width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius-sm); }
+.merch-name{ font-family: var(--font-display); font-size: 1.15rem; color: var(--ink); margin: 0.6rem 0 0; line-height: 1.25; text-align: center; }
 
 /* Tablet + phone: feature stacks; the collection becomes a swipeable shelf */
 @media (max-width: 899px){
@@ -689,8 +696,7 @@ p:last-child{ margin-bottom: 0; }
     padding: 0 var(--gutter) 0.5rem; scroll-padding: 0 var(--gutter);
   }
   .merch-grid::-webkit-scrollbar{ display: none; }
-  .merch-item{ flex: 0 0 calc((100% - 2rem) / 3); scroll-snap-align: start; }
-  .merch-item:nth-child(even){ margin-top: 0; }
+  .merch-item{ flex: 0 0 40%; scroll-snap-align: start; }
 }
 @media (max-width: 600px){
   .merch-item{ flex-basis: 62%; }
@@ -702,6 +708,7 @@ p:last-child{ margin-bottom: 0; }
   .merch-feature .mf-name{ order: 2; font-size: 1.9rem; margin-bottom: 1rem; }
   .merch-feature .mf-main{ order: 3; aspect-ratio: 4 / 4.6; }
   .merch-feature--v60 .mf-variants{ order: 4; max-width: none; margin-top: 0.9rem; gap: 0.6rem; }
+  .merch-feature--v60 .mf-main{ aspect-ratio: 4 / 5; }
   .merch-feature--v60 .mf-variants img{ aspect-ratio: 1; }
   .merch-feature--v60 .mf-variants span{ margin-top: 0.45rem; letter-spacing: 0.12em; text-align: center; }
   .merch-name{ font-size: 1.05rem; }
@@ -738,6 +745,7 @@ p:last-child{ margin-bottom: 0; }
 /* Photo sits flush in the top of the "tray" */
 .pkg-photo{ margin: 0 -1.2rem clamp(1.4rem, 3vw, 1.9rem); aspect-ratio: 16 / 11; overflow: hidden; }
 .pkg-photo img{ width: 100%; height: 100%; object-fit: cover; }
+.package:nth-child(3) .pkg-photo img{ object-position: 50% 70%; }   /* keep the whole Coco Matcha Cloud cup in view */
 .pkg-num{ font-family: var(--font-display); font-weight: 350; font-size: clamp(3.4rem, 7vw, 5rem); line-height: 1; color: var(--ink) !important; letter-spacing: -0.03em; }
 .pkg-unit{ font-size: var(--fs-label); font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--terracotta-text) !important; margin-top: 0.5rem !important; }
 .pkg-cups{ margin-top: 1.3rem !important; padding-top: 1.1rem; border-top: 1px dotted var(--steel-deep); color: var(--ink-soft); width: 70%; }
