@@ -1,0 +1,17 @@
+<!--
+  Zayn Coffee PH - convert site JPEGs to WebP (quality 0.82) in Chrome.
+  The site serves WebP; tools/optimize-images.ps1 still writes JPEGs, so after re-running it:
+  1. list the new JPEGs:  find assets/img -name "*.jpg" -not -path "assets/img/og/*" > <work>/list.txt
+  2. in <work>, make a junction "site" -> project folder, copy this file in, then run
+     the save server:  powershell -File tools/serve-save.ps1 -Root <work> -Port 8093
+  3. open http://localhost:8093/convert-webp.html ; results land in <work>/out (paths use "__" for "/")
+  4. move them next to the JPEGs, delete the JPEGs, and point index.html at the .webp files.
+-->
+<!doctype html><html><body><pre id="log"></pre><script type="module">
+const list=(await (await fetch('/list.txt')).text()).trim().split('\n');let n=0;
+for(const p of list){const r=await fetch('/site/'+p); const b=await r.blob(); const bmp=await createImageBitmap(b);
+ const c=document.createElement('canvas');c.width=bmp.width;c.height=bmp.height;c.getContext('2d').drawImage(bmp,0,0);
+ const w=await new Promise(res=>c.toBlob(res,'image/webp',0.82));
+ await fetch('/save?name='+encodeURIComponent(p.replace(/\//g,'__').replace(/\.jpg$/,'.webp')),{method:'POST',body:w});n++;}
+await fetch('/save?name=DONE.txt',{method:'POST',body:String(n)});
+</script></body></html>

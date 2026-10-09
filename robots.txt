@@ -1,0 +1,7 @@
+# Zayn Coffee PH
+# Note: on GitHub Pages project sites, search engines only read robots.txt at the host root
+# (lendezstudio.github.io/robots.txt). This file takes full effect once a custom domain is connected.
+User-agent: *
+Allow: /
+
+Sitemap: https://lendezstudio.github.io/Zayn-Coffee-PH/sitemap.xml

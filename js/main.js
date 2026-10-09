@@ -116,12 +116,12 @@
         main.classList.add("is-swapping");
         var next = new Image();
         next.onload = next.onerror = function () {
-          main.srcset = base + "-480.jpg 480w, " + base + "-960.jpg 960w";
-          main.src = base + "-960.jpg";
+          main.srcset = base + "-480.webp 480w, " + base + "-960.webp 960w";
+          main.src = base + "-960.webp";
           main.alt = btn.getAttribute("data-alt");
           main.classList.remove("is-swapping");
         };
-        next.src = base + "-960.jpg";
+        next.src = base + "-960.webp";
       });
     });
   });

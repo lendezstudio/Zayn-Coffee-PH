@@ -334,6 +334,7 @@ p:last-child{ margin-bottom: 0; }
 .hero h1{ font-size: var(--fs-display); letter-spacing: -0.025em; margin-bottom: 1.4rem; }
 /* Both headline lines share one treatment (upright Fraunces, regular weight, ink) like the Our Mission heading */
 .hero h1 .hero-line{ display: block; }
+.hero h1 .hero-kicker{ display: block; line-height: 1.65; letter-spacing: 0.22em; }
 .hero .lede{ max-width: 46ch; }
 
 .hero-media{ position: relative; padding: 0 0 3rem 3rem; }
