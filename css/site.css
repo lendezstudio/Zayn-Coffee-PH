@@ -228,6 +228,14 @@ p:last-child{ margin-bottom: 0; }
 
 .js .reveal{ opacity: 0; transform: translateY(14px); transition: opacity var(--dur-med) var(--ease), transform var(--dur-med) var(--ease); }
 .js .reveal.is-visible{ opacity: 1; transform: none; }
+/* Photos: a more noticeable rise + fade, and (inside clipped frames) the photo settles from a soft zoom */
+.js .reveal:has(img){ transform: translateY(36px); transition: opacity 1s var(--ease), transform 1.1s var(--ease); }
+.js .reveal:has(img).is-visible{ transform: none; }
+.js .g.reveal img, .js .sp.reveal img, .js .reveal .pkg-photo img{ transform: scale(1.08); transition: transform 1.6s var(--ease); }
+.js .g.reveal.is-visible img, .js .sp.reveal.is-visible img, .js .reveal.is-visible .pkg-photo img{ transform: none; }
+/* gentle stagger across the gallery tiles */
+.js .gallery .g:nth-child(3n+2){ transition-delay: 0.08s; }
+.js .gallery .g:nth-child(3n){ transition-delay: 0.16s; }
 
 @media (prefers-reduced-motion: reduce){
   html{ scroll-behavior: auto; }
@@ -625,7 +633,7 @@ p:last-child{ margin-bottom: 0; }
 .g-bottle img{ object-position: 55% 45%; }   /* bottle is the focus */
 /* Subtle zoom on devices with a real hover; touch devices keep the still image */
 @media (hover: hover) and (prefers-reduced-motion: no-preference){
-  .g:hover img{ transform: scale(1.035); }
+  .g:hover img, .js .g.reveal.is-visible:hover img{ transform: scale(1.035); }
 }
 
 /* Tablet + phone: alternate full-width and paired rows, so the rhythm changes as you scroll */
