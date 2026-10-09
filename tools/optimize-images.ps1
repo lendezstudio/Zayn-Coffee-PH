@@ -71,7 +71,7 @@ $manifest = @(
   @{ src="IMG_3619";     dir="client"; out="gallery/need-more-coffee-wall"; w=@(480,960) }
   @{ src="IMG_3616";     dir="client"; out="gallery/coffee-bar";            w=@(480,960) }
   @{ src="IMG_3578";     dir="client"; out="gallery/seating-life-happens";  w=@(480,960,1600) }
-  @{ src="IMG_3898"; dir="client"; out="story/metal-details"; crop=@(0.095,0,0.809,1); w=@(480,939) }
+  @{ src="IMG_3898"; dir="client"; out="story/metal-details"; crop=@(0,0,0.809,1); w=@(480,939) }
   @{ src="IMG_3913";     dir="client"; out="gallery/brew-station"; w=@(480,960) }
   @{ src="Cappuccino.";  dir="client"; out="gallery/cappuccino-tray"; w=@(480,960) }
   @{ src="Espresso extraction"; dir="October 5"; out="gallery/espresso-extraction"; w=@(480,960) }

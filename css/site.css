@@ -652,6 +652,8 @@ p:last-child{ margin-bottom: 0; }
   .g-pull{ aspect-ratio: 3 / 4; }
   .g-bottle{ aspect-ratio: 3 / 4; }
   .g-seat img{ object-position: 50% 60%; }
+  /* arched tops, echoing the window-bar tile */
+  .g-cup, .g-bottle{ border-radius: 999px 999px var(--radius-sm) var(--radius-sm); }
 }
 
 /* ---------- Merchandise ---------- */
