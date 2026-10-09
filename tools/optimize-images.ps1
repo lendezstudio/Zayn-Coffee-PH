@@ -43,7 +43,8 @@ $manifest = @(
   @{ src="601814454"; out="story/textured-cream-wall";      w=@(480,960) }
 
   # Menu: drinks named by Zayn Coffee in their filenames (Images from Client)
-  @{ src="615782441"; out="menu/latte-cheesecake-tray";  w=@(480,960) }
+  # Lead favourite: client edit "Sunlit Blueberry Cheesecake and Latte (2)"
+  @{ src="Sunlit Blueberry Cheesecake and Latte (2)"; dir="Edited"; out="menu/latte-cheesecake-tray"; w=@(480,960) }
   @{ src="E25A4363";           dir="October 5"; out="menu/spanish-latte-iced"; w=@(480,960) }
   @{ src="Sunlit Zayn Coffee Still Life."; dir="October 5"; out="menu/cold-brew"; w=@(480,941) }
   @{ src="Sunlit Mont Blanc"; dir="October 5"; out="menu/mont-blanc"; w=@(480,960) }
