@@ -743,9 +743,9 @@ p:last-child{ margin-bottom: 0; }
 }
 .package p{ margin: 0 auto; }
 /* Photo sits flush in the top of the "tray" */
+/* Package cards: client "Zayn Coffee Cart Showcase" edit, cart centred in the frame */
 .pkg-photo{ margin: 0 -1.2rem clamp(1.4rem, 3vw, 1.9rem); aspect-ratio: 16 / 11; overflow: hidden; }
-.pkg-photo img{ width: 100%; height: 100%; object-fit: cover; }
-.package:nth-child(3) .pkg-photo img{ object-position: 50% 50%; }   /* photo is pre-cropped around the cup */
+.pkg-photo img{ width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
 .pkg-num{ font-family: var(--font-display); font-weight: 350; font-size: clamp(3.4rem, 7vw, 5rem); line-height: 1; color: var(--ink) !important; letter-spacing: -0.03em; }
 .pkg-unit{ font-size: var(--fs-label); font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--terracotta-text) !important; margin-top: 0.5rem !important; }
 .pkg-cups{ margin-top: 1.3rem !important; padding-top: 1.1rem; border-top: 1px dotted var(--steel-deep); color: var(--ink-soft); width: 70%; }
@@ -846,15 +846,19 @@ p:last-child{ margin-bottom: 0; }
   display: flex; align-items: flex-end;
   background: var(--night);
 }
-.final-cta-bg{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; z-index: -2; }
+.final-cta-bg{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 35% 50%; z-index: -2; }
 .final-cta::after{
   content: ''; position: absolute; inset: 0; z-index: -1;
-  background: linear-gradient(0deg, rgba(26,19,12,0.88) 0%, rgba(26,19,12,0.45) 55%, rgba(26,19,12,0.15) 100%);
+  /* Earthtone texture has bright cream areas: a warm dark wash (stronger behind the text, bottom-left) keeps the copy readable */
+  background:
+    linear-gradient(0deg, rgba(26,19,12,0.86) 0%, rgba(26,19,12,0.62) 55%, rgba(26,19,12,0.42) 100%),
+    linear-gradient(90deg, rgba(26,19,12,0.35) 0%, rgba(26,19,12,0) 70%);
 }
 .final-cta-inner{ width: 100%; padding-top: 5rem; padding-bottom: clamp(3rem, 7vw, 5rem); }
-.final-cta h2{ color: var(--cream); font-size: clamp(2.4rem, 6vw, 4.4rem); max-width: 14ch; margin-bottom: 1rem; }
-.final-cta p{ color: rgba(247,240,228,0.88); font-size: var(--fs-lede); }
+.final-cta h2{ color: var(--cream); font-size: clamp(2.4rem, 6vw, 4.4rem); max-width: 14ch; margin-bottom: 1rem; text-shadow: 0 2px 18px rgba(26,19,12,0.35); }
+.final-cta p{ color: rgba(247,240,228,0.94); font-size: var(--fs-lede); text-shadow: 0 1px 12px rgba(26,19,12,0.4); }
 .final-cta .btn-row{ margin-top: 1.8rem; }
+.final-cta .btn-ghost-light{ border-color: rgba(247,240,228,0.8); background: rgba(26,19,12,0.22); }
 
 /* ---------- Footer ---------- */
 

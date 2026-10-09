@@ -35,12 +35,12 @@ $manifest = @(
   @{ src="675176519"; out="story/barista-espresso-machine"; w=@(480,960) }
   # Thatched-roof tile: client photo of the entrance under the thatched roof
   @{ src="IMG_5902";  dir="client"; out="story/entrance-thatched-roof"; w=@(480,960) }
-  @{ src="601854507"; out="story/rattan-seating-nook";      w=@(480,960) }
+  # Earthy wood: dining corner, cropped below the plain ceiling so the wood, rattan and rope details lead
+  @{ src="602390018"; out="story/earthy-dining-corner"; crop=@(0.31,0.31,0.69,0.69); w=@(480,960) }
   @{ src="602335049"; out="story/pendant-lights-arch";      w=@(480,960) }
   @{ src="IMG_3621";  dir="client"; out="story/table-dried-flowers"; w=@(480,960) }
   # Materials strip (whole photos, uncropped)
   @{ src="601814454"; out="story/textured-cream-wall";      w=@(480,960) }
-  @{ src="676023496"; out="story/metal-tables";             w=@(480,960) }
 
   # Menu: drinks named by Zayn Coffee in their filenames (Images from Client)
   @{ src="615782441"; out="menu/latte-cheesecake-tray";  w=@(480,960) }
@@ -70,6 +70,8 @@ $manifest = @(
   @{ src="IMG_3619";     dir="client"; out="gallery/need-more-coffee-wall"; w=@(480,960) }
   @{ src="IMG_3616";     dir="client"; out="gallery/coffee-bar";            w=@(480,960) }
   @{ src="IMG_3578";     dir="client"; out="gallery/seating-life-happens";  w=@(480,960,1600) }
+  # Metal details tile: same photo, retouched copy without the box on the floor (tools/remove-objects.ps1)
+  @{ src="IMG_3578_edited"; dir="client"; out="story/metal-details"; w=@(480,960) }
   # Latte cup: crop away empty space above so the cup sits centred in the tile
   @{ src="721387732";    out="gallery/latte-art-cup"; crop=@(0.06,0.24,0.78,0.76); w=@(480,900) }
   @{ src="718075932";    out="gallery/doorway-night";           w=@(480,960) }
@@ -88,18 +90,17 @@ $manifest = @(
   @{ src="ChatGPT Image Oct 6, 2026, 08_29_37 PM-1"; dir="Merchandise Edited"; out="merch/edited/glass";      w=@(480,960) }
   @{ src="ChatGPT Image Oct 6, 2026, 08_18_10 PM-3"; dir="Merchandise Edited"; out="merch/edited/beans";      w=@(480,960) }
 
+  # Package cards: client edit "Zayn Coffee Cart Showcase" (Images from Client/Edited)
+  @{ src="Zayn Coffee Cart Showcase"; dir="Edited"; out="events/cart-showcase"; w=@(800,1600) }
   # Mobile Coffee Events: real event setups (Images from Client)
   @{ src="13DFBFD3";  dir="October 5"; out="events/cart-canopy-lawn";   w=@(480,960) }
   @{ src="A9F7238D";  dir="October 5"; out="events/cart-covered-patio"; w=@(480,960) }
-  # Package cards (coffee mood images)
-  @{ src="720823189"; out="events/pkg-latte-tray";  w=@(480,960) }
-  @{ src="795661510"; out="events/pkg-latte-golden-hour"; w=@(480,960) }
-  # 150 card: crop centred on the cup (~46% across, ~52% down) so it fills the card like the others
-  @{ src="602474075"; out="events/pkg-iced-latte"; crop=@(0.12,0.175,0.69,0.69); w=@(480,960) }
 
   # Visit + final CTA
-  @{ src="IMG_5459";  dir="client"; out="visit/storefront-sunny"; w=@(480,960) }
-  @{ src="IMG_5921."; dir="client"; out="cta/storefront-dusk";    w=@(960,1600,2048) }
+  # Visit: storefront, cropped so the ZAYN COFFEE sign sits in the middle of the arch
+  @{ src="WhatsApp Image 2026-10-09 at 9.43.16"; dir="client"; out="visit/storefront-sunny"; crop=@(0,0,0.699,0.8125); w=@(480,780) }
+  # Final CTA background: client edit "Layered Earthtone Strata"
+  @{ src="Layered Earthtone Strata"; dir="Edited"; out="cta/earthtone-strata"; w=@(960,1600) }
 
 
   # Social preview photo (IMG_3618, 1200x630); the text overlay is added by tools/make-og-image.ps1
