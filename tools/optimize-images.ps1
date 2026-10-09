@@ -71,11 +71,9 @@ $manifest = @(
   @{ src="IMG_3619";     dir="client"; out="gallery/need-more-coffee-wall"; w=@(480,960) }
   @{ src="IMG_3616";     dir="client"; out="gallery/coffee-bar";            w=@(480,960) }
   @{ src="IMG_3578";     dir="client"; out="gallery/seating-life-happens";  w=@(480,960,1600) }
-  # Metal details tile: same photo, retouched copy without the box on the floor (tools/remove-objects.ps1)
-  @{ src="IMG_3578_edited"; dir="client"; out="story/metal-details"; w=@(480,960) }
-  # Latte cup: crop away empty space above so the cup sits centred in the tile
-  @{ src="721387732";    out="gallery/latte-art-cup"; crop=@(0.06,0.24,0.78,0.76); w=@(480,900) }
-  @{ src="718075932";    out="gallery/doorway-night";           w=@(480,960) }
+  @{ src="IMG_3898"; dir="client"; out="story/metal-details"; crop=@(0.095,0,0.809,1); w=@(480,939) }
+  @{ src="IMG_3913";     dir="client"; out="gallery/brew-station"; w=@(480,960) }
+  @{ src="Cappuccino.";  dir="client"; out="gallery/cappuccino-tray"; w=@(480,960) }
   @{ src="Espresso extraction"; dir="October 5"; out="gallery/espresso-extraction"; w=@(480,960) }
   @{ src="Spanish in a Bottle";  dir="October 5"; out="gallery/spanish-in-a-bottle"; w=@(480,960) }
 

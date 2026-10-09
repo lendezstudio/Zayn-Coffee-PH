@@ -332,7 +332,8 @@ p:last-child{ margin-bottom: 0; }
   padding-top: clamp(2.5rem, 6vw, 4rem); padding-bottom: clamp(3rem, 7vw, 5rem);
 }
 .hero h1{ font-size: var(--fs-display); letter-spacing: -0.025em; margin-bottom: 1.4rem; }
-.hero h1 em{ font-style: italic; font-weight: 350; color: var(--terracotta-deep); }
+/* Both headline lines share one treatment (upright Fraunces, regular weight, ink) like the Our Mission heading */
+.hero h1 .hero-line{ display: block; }
 .hero .lede{ max-width: 46ch; }
 
 .hero-media{ position: relative; padding: 0 0 3rem 3rem; }
@@ -608,13 +609,13 @@ p:last-child{ margin-bottom: 0; }
 .g-sign{ grid-area: c; }
 .g-sign img{ object-position: 72% 40%; }   /* keep the wall graphic in frame */
 .g-cup{ grid-area: e; }
-.g-cup img{ object-position: 50% 50%; }
+.g-cup img{ object-position: 50% 62%; }   /* brew station: kettle, jars and bean bags */
 .g-seat{ grid-area: f; }
 .g-seat img{ object-position: 50% 58%; }   /* sign + bench both visible */
 .g-bar{ grid-area: d; }
 .g-bar img{ object-position: 50% 45%; }
 .g-door{ grid-area: g; }
-.g-door img{ object-position: 45% 0%; }   /* sign sits ~28% down the photo: show it as high as the frame allows */
+.g-door img{ object-position: 35% 58%; }   /* cappuccino + water glass on the tray */
 .g-pull{ grid-area: h; }
 .g-pull img{ object-position: 50% 50%; }
 .g-bottle{ grid-area: i; }
@@ -635,8 +636,8 @@ p:last-child{ margin-bottom: 0; }
   .g-arch, .g-sign{ aspect-ratio: 3 / 4; }
   .g-seat{ aspect-ratio: 4 / 3; }
   .g-bar, .g-cup{ aspect-ratio: 4 / 5; }
-  .g-door{ aspect-ratio: 16 / 10; }
-  .g-door img{ object-position: 45% 9%; }   /* wide frame: centres the ZAYN COFFEE sign vertically */
+  .g-door{ aspect-ratio: 3 / 4; }   /* same shape as the cappuccino photo: shown whole, no zoom */
+  .g-door img{ object-position: 50% 50%; }
   .g-pull, .g-bottle{ aspect-ratio: 4 / 5; }
   .g-seat img{ object-position: 50% 60%; }
 }

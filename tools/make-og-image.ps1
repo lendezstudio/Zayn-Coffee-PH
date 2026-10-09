@@ -2,7 +2,7 @@
   Zayn Coffee PH - render the social preview image
   -------------------------------------------------
   Renders tools/og-template.html with headless Chrome (or Edge) at 1200x630
-  and saves assets/img/og/zayn-coffee-og.jpg. Needs an internet connection for
+  and saves assets/img/og/zayn-coffee-og-v6.jpg. Needs an internet connection for
   the Google Fonts used by the template.
 
   Usage (from the project root):
@@ -12,7 +12,7 @@ Add-Type -AssemblyName System.Drawing
 
 $root = Split-Path -Parent $PSScriptRoot
 $template = Join-Path $root "tools\og-template.html"
-$out = Join-Path $root "assets\img\og\zayn-coffee-og.jpg"
+$out = Join-Path $root "assets\img\og\zayn-coffee-og-v6.jpg"
 $tmpPng = Join-Path $env:TEMP "zayn-og-render.png"
 $profile = Join-Path $env:TEMP "zayn-og-chrome-profile"
 
