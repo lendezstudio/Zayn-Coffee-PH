@@ -632,7 +632,7 @@ p:last-child{ margin-bottom: 0; }
 @media (max-width: 899px){
   .gallery{
     grid-template-columns: 1fr 1fr; grid-template-rows: none;
-    grid-template-areas: "a a" "b c" "f f" "d e" "g g" "h i";
+    grid-template-areas: "a a" "b c" "f f" "d e" "i i" "h g";   /* bottle full-width, cappuccino beside the espresso shot */
     gap: clamp(0.6rem, 2vw, 1rem);
   }
   .g-anchor{ aspect-ratio: 5 / 6; }
@@ -641,7 +641,8 @@ p:last-child{ margin-bottom: 0; }
   .g-bar, .g-cup{ aspect-ratio: 4 / 5; }
   .g-door{ aspect-ratio: 3 / 4; }   /* same shape as the cappuccino photo: shown whole, no zoom */
   .g-door img{ object-position: 50% 50%; }
-  .g-pull, .g-bottle{ aspect-ratio: 4 / 5; }
+  .g-pull{ aspect-ratio: 3 / 4; }
+  .g-bottle{ aspect-ratio: 3 / 4; }   /* full-width on phones: whole photo, bottle in view */
   .g-seat img{ object-position: 50% 60%; }
 }
 
