@@ -61,6 +61,7 @@ $manifest = @(
   @{ src="Egg tart";      dir="October 10"; out="menu/egg-tart";      w=@(480,960) }
   @{ src="Puto Maya";     dir="October 10"; out="menu/puto-maya";     w=@(480,960) }
   @{ src="Carrot Cake";   dir="October 10"; out="menu/carrot-cake";   w=@(480,960) }
+  @{ src="Sea salt cream latte"; dir="October 10"; out="menu/sea-salt-cream-latte"; w=@(480,960) }
   # Menu: earlier photos (photo-to-item matches PENDING CLIENT CONFIRMATION)
   @{ src="French butter croissant"; dir="October 5"; out="menu/butter-croissant"; w=@(480,960) }
   @{ src="Cozy Matcha White Chocolate Cookies"; dir="October 5"; out="menu/matcha-cookies"; w=@(480,960) }
