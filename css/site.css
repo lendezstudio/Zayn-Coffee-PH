@@ -563,7 +563,8 @@ p:last-child{ margin-bottom: 0; }
 #m-coldbrew .cat-pair figure:last-child img{ object-position: 50% 62%; }
 #m-matcha .cat-pair img{ aspect-ratio: 3 / 4; }   /* both portrait: tray photo shows uncropped */
 #m-matcha .cat-pair figure:last-child img{ object-position: 50% 40%; }
-#m-pastries .cat-photo img{ object-position: 50% 44%; }
+.cat-trio{ grid-template-columns: repeat(3, 1fr); }
+.cat-trio figcaption{ letter-spacing: 0.1em; }
 #m-extras .cat-photo img{ object-position: 50% 52%; }
 
 .price-list li{

@@ -56,6 +56,11 @@ $manifest = @(
   @{ src="Espresso shot";      dir="October 5"; out="menu/espresso-shot";    w=@(480,960) }
   @{ src="Long balck";         dir="October 5"; out="menu/iced-long-black";  w=@(480,960) }
   @{ src="IMG_3620";           dir="client"; out="menu/toasted-sandwich";    w=@(480,960) }
+  # Best-sellers named by Zayn Coffee (October 10)
+  @{ src="Biscoff latte"; dir="October 10"; out="menu/biscoff-latte"; crop=@(0,0.19,1,0.784); w=@(480,960) }
+  @{ src="Egg tart";      dir="October 10"; out="menu/egg-tart";      w=@(480,960) }
+  @{ src="Puto Maya";     dir="October 10"; out="menu/puto-maya";     w=@(480,960) }
+  @{ src="Carrot Cake";   dir="October 10"; out="menu/carrot-cake";   w=@(480,960) }
   # Menu: earlier photos (photo-to-item matches PENDING CLIENT CONFIRMATION)
   @{ src="French butter croissant"; dir="October 5"; out="menu/butter-croissant"; w=@(480,960) }
   @{ src="Cozy Matcha White Chocolate Cookies"; dir="October 5"; out="menu/matcha-cookies"; w=@(480,960) }
