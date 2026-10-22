@@ -94,6 +94,13 @@ $manifest = @(
   @{ src="ChatGPT Image Oct 6, 2026, 08_29_39 PM-2"; dir="Merchandise Edited"; out="merch/edited/decanter";   w=@(480,960) }
   @{ src="ChatGPT Image Oct 6, 2026, 08_29_37 PM-1"; dir="Merchandise Edited"; out="merch/edited/glass";      w=@(480,960) }
   @{ src="ChatGPT Image Oct 6, 2026, 08_18_10 PM-3"; dir="Merchandise Edited"; out="merch/edited/beans";      w=@(480,960) }
+  # Zayn Coffee Cap colours (client edits, October 22)
+  @{ src="Taupe Cap in Golden Sunlight-1";     dir="Merchandise Edited"; out="merch/edited/cap-taupe";       w=@(480,960) }
+  @{ src="Slate Blue Cap on Sunlit Table-2";   dir="Merchandise Edited"; out="merch/edited/cap-slate-blue";  w=@(480,960) }
+  @{ src="Washed Teal Cap in Golden Light-3";  dir="Merchandise Edited"; out="merch/edited/cap-washed-teal"; w=@(480,960) }
+  @{ src="Cream Cap on Sunlit Wooden Table-4"; dir="Merchandise Edited"; out="merch/edited/cap-cream";       w=@(480,960) }
+  @{ src="Pink Cap on a Sunlit Table-5";       dir="Merchandise Edited"; out="merch/edited/cap-pink";        w=@(480,960) }
+  @{ src="Sky blue cap on sunlit table-6";     dir="Merchandise Edited"; out="merch/edited/cap-sky-blue";    w=@(480,960) }
 
   # Package cards: client edit "Zayn Coffee Cart Showcase" (Images from Client/Edited)
   @{ src="Zayn Coffee Cart Showcase"; dir="Edited"; out="events/cart-showcase"; w=@(800,1600) }
