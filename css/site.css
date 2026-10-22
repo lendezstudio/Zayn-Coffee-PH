@@ -696,10 +696,6 @@ p:last-child{ margin-bottom: 0; }
   display: block; margin-top: 0.6rem; font-size: var(--fs-label); font-weight: 600;
   letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-soft);
 }
-/* Zayn Coffee Cap: mirrored feature (photo right) with round colour swatches */
-.merch-feature--cap{ grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); }
-.merch-feature--cap .mf-main{ order: 2; aspect-ratio: 4 / 5; }
-.merch-feature--cap .mf-main img{ object-position: 50% 55%; }
 .mf-note{ margin: calc(clamp(1.5rem, 3vw, 2.2rem) * -0.55) 0 clamp(1.3rem, 2.6vw, 1.9rem); }
 .mf-swatches{ display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.1rem 0.75rem; max-width: 420px; }
 .mf-swatches button{
@@ -718,6 +714,26 @@ p:last-child{ margin-bottom: 0; }
   color: var(--ink-soft); line-height: 1.3;
 }
 .mf-swatches button[aria-pressed="true"] span:not(.dot){ color: var(--ink); }
+/* Zayn Coffee Cap: name and description on top, then the photo with the colour list stacked on its right */
+.merch-feature.merch-feature--cap{
+  grid-template-columns: minmax(0, 520px) minmax(0, max-content);
+  grid-template-areas: "label label" "name name" "note note" "main swatches";
+  column-gap: clamp(1.2rem, 4vw, 3.5rem); row-gap: 0; align-items: start; justify-content: start;
+}
+.merch-feature.merch-feature--cap .mf-side{ display: contents; }
+.merch-feature.merch-feature--cap .mf-label{ grid-area: label; }
+.merch-feature.merch-feature--cap .mf-name{ grid-area: name; margin-bottom: 0.6rem; }
+.merch-feature.merch-feature--cap .mf-note{ grid-area: note; margin: 0 0 clamp(1.2rem, 2.6vw, 1.8rem); }
+.merch-feature.merch-feature--cap .mf-main{ grid-area: main; aspect-ratio: 4 / 5; }
+.merch-feature.merch-feature--cap .mf-main img{ object-position: 50% 55%; }
+.merch-feature.merch-feature--cap .mf-swatches{ grid-area: swatches; grid-template-columns: 1fr; gap: 0.35rem; align-self: center; max-width: none; }
+@media (max-width: 600px){
+  .merch-feature.merch-feature--cap{ grid-template-columns: minmax(0, 1fr) minmax(0, max-content); column-gap: 0.9rem; }
+  .merch-feature.merch-feature--cap .mf-name{ font-size: 1.9rem; }
+  .merch-feature.merch-feature--cap .mf-swatches{ gap: 0.15rem; }
+  .merch-feature.merch-feature--cap .mf-swatches .dot{ width: 1.75rem; height: 1.75rem; }
+  .merch-feature.merch-feature--cap .mf-swatches span:not(.dot){ letter-spacing: 0.08em; }
+}
 /* Collection row: four products, evenly aligned */
 .merch-grid{ display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.6rem); margin-bottom: 2rem; }
 .merch-item img{ width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius-sm); }
@@ -747,9 +763,6 @@ p:last-child{ margin-bottom: 0; }
   .merch-feature--v60 .mf-main{ aspect-ratio: 4 / 5; }
   .merch-feature--v60 .mf-variants img{ aspect-ratio: 1; }
   .merch-feature--v60 .mf-variants span{ margin-top: 0.45rem; letter-spacing: 0.12em; text-align: center; }
-  .merch-feature--cap .mf-main{ order: 3; }
-  .merch-feature--cap .mf-note{ order: 2; margin: -0.4rem 0 1rem; }
-  .merch-feature--cap .mf-swatches{ order: 4; max-width: none; margin-top: 1rem; gap: 0.6rem 0.5rem; }
   .merch-name{ font-size: 1.05rem; }
 }
 
