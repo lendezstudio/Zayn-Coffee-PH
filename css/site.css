@@ -696,16 +696,8 @@ p:last-child{ margin-bottom: 0; }
   display: block; margin-top: 0.6rem; font-size: var(--fs-label); font-weight: 600;
   letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-soft);
 }
-/* Zayn Coffee Cap: text left; photo right with its colour thumbnails in one row underneath */
-.merch-feature--cap{
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
-  grid-template-areas: "side main" ". variants"; row-gap: 1rem;
-}
-.merch-feature--cap .mf-side{ grid-area: side; }
-.merch-feature--cap .mf-main{ grid-area: main; }
-.merch-feature--cap .mf-variants{ grid-area: variants; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0.6rem; max-width: none; }
-.merch-feature--cap .mf-variants span{ letter-spacing: 0.1em; text-align: center; }
-.mf-note{ margin: calc(clamp(1.5rem, 3vw, 2.2rem) * -0.55) 0 0; }
+/* Short line under a feature name (Zayn Coffee Cap) */
+.mf-note{ margin: calc(clamp(1.5rem, 3vw, 2.2rem) * -0.55) 0 clamp(1.3rem, 2.6vw, 1.9rem); }
 /* Collection row: four products, evenly aligned */
 .merch-grid{ display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(1rem, 2vw, 1.6rem); margin-bottom: 2rem; }
 .merch-item img{ width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius-sm); }
@@ -735,10 +727,7 @@ p:last-child{ margin-bottom: 0; }
   .merch-feature--variants .mf-main{ aspect-ratio: 4 / 5; }
   .merch-feature--variants .mf-variants img{ aspect-ratio: 1; }
   .merch-feature--variants .mf-variants span{ margin-top: 0.45rem; letter-spacing: 0.12em; text-align: center; }
-  .merch-feature--cap{ grid-template-areas: none; }
-  .merch-feature--cap .mf-main, .merch-feature--cap .mf-variants{ grid-area: auto; }
   .merch-feature--cap .mf-note{ order: 2; margin: -0.4rem 0 1rem; }
-  .merch-feature--cap .mf-variants{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .merch-name{ font-size: 1.05rem; }
 }
 
